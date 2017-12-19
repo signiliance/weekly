@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
-import { Form, Icon, Input, Button, Checkbox,Row,Col} from 'antd';
+import { Form, Icon, Input, Button,Row,Col} from 'antd';
 //import 'antd/lib/layout/style/css';
 import 'antd/dist/antd.css';
-import { connect } from 'dva';
+//import { connect } from 'dva';
 //import styles from '../css/index.less'
 
 

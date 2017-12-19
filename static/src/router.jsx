@@ -17,6 +17,7 @@ export default ({})=>{
         <Router history={browserHistory}>
             <Route path='/'  component={LoginPage} />
             <Route path= '/admin' component={App}/>
+
         </Router>
     )
 }

@@ -9,7 +9,7 @@ import 'antd/lib/layout/style/css'
 const {Header,Content,Footer} = Layout;
 
 
-class App extends Component {
+class Admin extends Component {
     render() {
         return (
             <Layout className="layout">
@@ -22,6 +22,9 @@ class App extends Component {
                         <p>index</p>
                     </div>
                 </Content>
+                <Footer style={{ textAlign: 'center' }}>
+                    OFO Design ©2016 Created by Signiliance
+                </Footer>
             </Layout>
         )
     }
@@ -32,4 +35,4 @@ class App extends Component {
     }
 }*/
 
-export default App;
+export default Admin;

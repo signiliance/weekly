@@ -1,26 +1,29 @@
 import React from 'react'
-import { Layout,  Breadcrumb } from 'antd'
+import { Layout,  Breadcrumb ,Row,Col,Input,Button} from 'antd'
 import HeadeNav from '../components/header-nav.jsx'
 //import FooterCommon from './../components/footer-common.jsx'
 import 'antd/lib/layout/style/css'
 
 
 const {Header,Content,Footer} = Layout;
+const {TextArea} = Input;
 
 
 class App extends React.Component {
     render() {
         return (
             <Layout className="layout">
-                <HeadeNav/>
+                <HeadeNav />
                 <Content style={{ padding: '0 50px' }}>
                     <Breadcrumb style={{ margin: '12px 0' }}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
+                        <Breadcrumb.Item>开开心心写周报</Breadcrumb.Item>
                     </Breadcrumb>
-                    <div style={{ background: '#fff', padding: 24, minHeight: '800' }}>
-                        <p>index</p>
-                    </div>
+                        <TextArea autoSize = {{minRows:1,maxRows:6}} style={{height:'75vh'}}/>
+                    <Button type = 'primary' size='large' style={{marginTop:'10px',float:'right'}}>submit</Button>
                 </Content>
+                <Footer style={{ textAlign: 'center' }}>
+                    OFO Design ©2017 Created by SIGNILIANCE
+                </Footer>
             </Layout>
         )
     }

@@ -4,11 +4,19 @@ import { Form, Icon, Input, Button,Row,Col} from 'antd';
 import 'antd/dist/antd.css';
 //import { connect } from 'dva';
 //import styles from '../css/index.less'
+import {browserHistory} from 'react-router';
 
 
 const FormItem = Form.Item;
 
 class NormalLoginForm extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+                userName:'',
+                password:''
+        }
+    }
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -16,6 +24,21 @@ class NormalLoginForm extends Component {
                 console.log('Received values of form: ', values);
             }
         });
+        //console.log(this.state);
+        if(this.state.userName=='ofo'&&this.state.password=='123') {
+            const path = '/admin';
+            browserHistory.push(path);
+        }
+    }
+    onchangeUserName =(e) =>{
+        this.setState({
+            userName:e.target.value,
+        })
+    }
+    onchangePassWord =(e) =>{
+        this.setState({
+            password:e.target.value,
+        })
     }
     render() {
         const { getFieldDecorator } = this.props.form;
@@ -28,18 +51,18 @@ class NormalLoginForm extends Component {
                     {getFieldDecorator('userName', {
                         rules: [{ required: true, message: 'Please input your username!' }],
                     })(
-                        <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                        <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} onChange = {this.onchangeUserName} placeholder="Username" />
                     )}
                 </FormItem>
                 <FormItem>
                     {getFieldDecorator('password', {
                         rules: [{ required: true, message: 'Please input your Password!' }],
                     })(
-                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} onChange = {this.onchangePassWord}  type="password" placeholder="Password" />
                     )}
                 </FormItem>
                 <FormItem>
-                    <Button type="primary" htmlType="submit" style = {{width: '100%'}}>
+                    <Button type="primary" onSubmit={this.handleSubmit} htmlType="submit" style = {{width: '100%'}}>
                         Sign in
                     </Button>
                 </FormItem>

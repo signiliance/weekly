@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 //import { connect } from 'dva';
 //import styles from '../css/index.less'
 import {browserHistory} from 'react-router';
+import Fetch from '../services/FetchData'
 
 
 const FormItem = Form.Item;
@@ -22,24 +23,31 @@ class NormalLoginForm extends Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
+                const form = this.props.form.getFieldsValue();
+                console.log(values);
+                console.log(form);
+                console.log('11111');
+                Fetch.loginMsgVaildate(form,(data)=>{
+                    console.log(data);
+                    //JSON.parse(data);
+                    if(data.login === 'true'){
+                    const path = '/admin';
+                    browserHistory.push(path);
+                }})
             }
         });
         //console.log(this.state);
-        if(this.state.userName=='ofo'&&this.state.password=='123') {
-            const path = '/admin';
-            browserHistory.push(path);
-        }
-    }
+    };
     onchangeUserName =(e) =>{
         this.setState({
             userName:e.target.value,
         })
-    }
+    };
     onchangePassWord =(e) =>{
         this.setState({
             password:e.target.value,
         })
-    }
+    };
     render() {
         const { getFieldDecorator } = this.props.form;
         return (

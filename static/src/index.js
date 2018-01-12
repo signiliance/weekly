@@ -6,7 +6,7 @@ import { render } from 'react-dom'
 //import router from './router';
 import Router from './router';
 
-render( <Router />,
+render(<Router />,
     document.getElementById('root'));
 
 //console.log(Router1);

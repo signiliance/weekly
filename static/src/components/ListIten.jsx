@@ -2,18 +2,24 @@ import React ,{Component}from 'react';
 import { List, Button, Divider} from 'antd';
 import 'antd/dist/antd.css';
 import {browserHistory} from 'react-router';
-import data from '../pages/list'
+import data from '../pages/list';
+import Fetch from '../services/FetchData';
+//import 'whatwg-fetch';
 
-
+//const comFetch = FetchData.comFetch;
 class ListItem extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            title:data[0].title||'',
-            msg:data[0].msg||'',
+            title:'',
+            msg:'',
             data:data,
         }
+    }
+
+    componentWillMount(){
+        Fetch.getListMsg((data)=>{console.log(data);})
     }
 
     handleClick=()=>{
@@ -44,7 +50,7 @@ class ListItem extends Component {
 
             <List
                 itemLayout="horizontal"
-                dataSource={data}
+                dataSource={this.state.data}
                 renderItem={item => (
                     <List.Item onClick={this.handleCheck}>
                         <List.Item.Meta

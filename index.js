@@ -11,7 +11,7 @@ const  serve = require("koa-static");
 const DBhandle = require('./init/sql/dbhandle');
 const app = new Koa();
 
-let WeeklyName = 'ofo';
+let WeeklyName = '';
 let content = '';
 let contentData = {};
 //const staticpath = '../static/public/'

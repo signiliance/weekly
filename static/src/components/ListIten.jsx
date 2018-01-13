@@ -1,11 +1,11 @@
 import React ,{Component}from 'react';
-import { List, Button, Divider} from 'antd';
+import { List, Button, Divider,Spin} from 'antd';
 import 'antd/dist/antd.css';
 import {browserHistory} from 'react-router';
 import data from '../pages/list';
 import Fetch from '../services/FetchData';
 //import 'whatwg-fetch';
-
+let shuzu = [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}];let i = 0;
 //const comFetch = FetchData.comFetch;
 class ListItem extends Component {
 
@@ -14,12 +14,26 @@ class ListItem extends Component {
         this.state = {
             title:'',
             msg:'',
-            data:data,
+            //data:{},
+            loading:true,
         }
     }
 
     componentWillMount(){
-        Fetch.getListMsg((data)=>{console.log(data);})
+        Fetch.getListMsg((data)=>{
+            console.log(data);
+            //console.log(typeof data);
+            this.setState({
+                data:data,
+                loading:false,
+        });
+            i = 0;
+            Object.keys(this.state.data).forEach(key=>{
+                shuzu[i].title = key;shuzu[i].msg = this.state.data[key];
+                i++;
+            });
+            //console.log(this.state);
+        })
     }
 
     handleClick=()=>{
@@ -38,34 +52,31 @@ class ListItem extends Component {
                 })
             }
         })
-        console.log(this.state.msg)
+        //console.log(this.state.msg)
     }
 
     render() {
-        return (
-            <div style={{display:'flex',justifyContent:'center',marginTop:'20px'}}>
-
-                <div style={{width:'30%'}}>
+        {console.log(this.state.data)}
+        return ( this.state.loading ? <Spin /> :
+            <div style={{width:'80vw'}}>
+                <div style = {{marginTop:10}}>
                 <Button icon='left' style = {{marginLeft:'40px'}} onClick={this.handleClick}>Back</Button>
+                </div>
+                <div style = {{marginTop:5,marginLeft:20}}>
+                <List
+                    itemLayout="horizontal"
+                    dataSource={shuzu}
+                    renderItem={item => (
+                        <List.Item>
+                            <List.Item.Meta
+                                title={<p>{item.title}</p>}
+                                description={item.msg}
+                            />
+                        </List.Item>
+                    )}
+                />
+                </div>
 
-            <List
-                itemLayout="horizontal"
-                dataSource={this.state.data}
-                renderItem={item => (
-                    <List.Item onClick={this.handleCheck}>
-                        <List.Item.Meta
-                            title={<a href='#' onClick={this.handleCheck}>{item.title}</a>}
-                        />
-                    </List.Item>
-                )}
-                style={{margin:'10px 40px'}}
-            />
-                </div>
-                <div style={{borderLeft:'1px solid #000',width:'70%',padding:'10px'}}>
-                    <p>{this.state.title}</p>
-                    <Divider />
-                    <p>{this.state.msg}</p>
-                </div>
             </div>
         )
     }

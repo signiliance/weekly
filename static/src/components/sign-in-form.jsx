@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Form, Icon, Input, Button,Row,Col} from 'antd';
+import { Form, Icon, Input, Button,Row,Col,Alert} from 'antd';
 //import 'antd/lib/layout/style/css';
 import 'antd/dist/antd.css';
 //import { connect } from 'dva';
@@ -15,25 +15,31 @@ class NormalLoginForm extends Component {
         super(props);
         this.state = {
                 userName:'',
-                password:''
+                password:'',
+                message:true,
         }
     }
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                //console.log('Received values of form: ', values);
                 const form = this.props.form.getFieldsValue();
-                console.log(values);
-                console.log(form);
-                console.log('11111');
+                //console.log(values);
+                //console.log(form);
+                //console.log('11111');
                 Fetch.loginMsgVaildate(form,(data)=>{
-                    console.log(data);
+                    //console.log(data);
                     //JSON.parse(data);
                     if(data.login === 'true'){
                     const path = '/admin';
                     browserHistory.push(path);
-                }})
+                }else{
+                        this.setState({
+                            message:false,
+                        })
+                    }
+                })
             }
         });
         //console.log(this.state);
@@ -69,7 +75,11 @@ class NormalLoginForm extends Component {
                         <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} onChange = {this.onchangePassWord}  type="password" placeholder="Password" />
                     )}
                 </FormItem>
-                <FormItem>
+                    {/*
+                    //TODO 验证失败时候的提示
+                    */}
+                    {/*{this.state.message?null:<Alert message={this.props.message} style={{ marginBottom: 0, wordBreak: 'break-all' }} type="error" showIcon />}*/}
+                    <FormItem>
                     <Button type="primary" onSubmit={this.handleSubmit} htmlType="submit" style = {{width: '100%'}}>
                         Sign in
                     </Button>

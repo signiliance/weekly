@@ -23,7 +23,7 @@ Fetch.loginMsgVaildate = (formData,succCallback) => {
     comFetch('post','/login',formData,succCallback);
 };
 
-Fetch.newWeeklyMsg = (flag,url,formData,succCallback) => {
+Fetch.newWeeklyMsg = (formData,succCallback) => {
     comFetch('post','/write',formData,succCallback);
 };
 

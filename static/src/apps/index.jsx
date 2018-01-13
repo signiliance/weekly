@@ -1,6 +1,7 @@
 import React from 'react'
 import { Layout,  Breadcrumb ,Row,Col,Input,Button} from 'antd';
 import HeadeNav from '../components/header-nav.jsx';
+import Fetch from '../services/FetchData';
 //import FooterCommon from './../components/footer-common.jsx'
 import 'antd/lib/layout/style/css'
 
@@ -14,23 +15,31 @@ class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            msg:'',
-            emial:''
+            title:'',
+            content:''
         }
     }
 
 
     onChangeTitle=(e)=>{
         this.setState({
-            msg:e.target.value
+            title:e.target.value
         })
-    }
+    };
 
     onChangeValue = (e)=>{
         this.setState({
-            emial:e.target.value
+            content:e.target.value
         })
-    }
+    };
+    onClickSubmit = () => {
+        const formData = this.state;
+        Fetch.newWeeklyMsg(formData,(data)=>{
+            if(data.msg === 'true'){
+                console.log('submit success');
+            }
+        })
+    };
     render() {
         return (
             <Layout className="layout">
@@ -41,7 +50,7 @@ class App extends React.Component {
                     </Breadcrumb>
                         <TextArea autosize style={{marginBottom:'10px',fontSize:'25px'}} placeholder="input the title" onChange={this.onChangeTitle}/>
                         <TextArea rows={30} onChange = {this.onChangeValue}/>
-                    <Button type = 'primary' size='large' style={{marginTop:'10px',float:'right'}}>submit</Button>
+                    <Button type = 'primary' size='large' style={{marginTop:'10px',float:'right'}} onClick={this.onClickSubmit}>submit</Button>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>
                     OFO Design ©2017 Created by SIGNILIANCE

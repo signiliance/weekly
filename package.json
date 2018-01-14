@@ -22,6 +22,7 @@
     "koa-bodyparser": "^4.2.0",
     "koa-cors": "0.0.16",
     "koa-router": "^7.3.0",
-    "koa-static": "^4.0.2"
+    "koa-static": "^4.0.2",
+    "nodemailer": "^4.4.1"
   }
 }

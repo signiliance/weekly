@@ -9,6 +9,7 @@ const router = new (require('koa-router'))();
 //const Homeee = require('../static/public');
 const  serve = require("koa-static");
 const DBhandle = require('./init/sql/dbhandle');
+const Mail = require('./init/mail/mail');
 const app = new Koa();
 
 let WeeklyName = '';
@@ -48,7 +49,9 @@ app.use(async (ctx) =>{
                 DBhandle.inputData(WeeklyName, content);
                 //console.log(content);
             }
-            ctx.body = {'login':'trie'};
+            Mail.sendMail(WeeklyName,ctx.request.body);
+            ctx.body = {'login':'true'};
+
        /* DBhandle.inputData(WeeklyName, content);
         ctx.body = {'login':'trie'};*/
     }

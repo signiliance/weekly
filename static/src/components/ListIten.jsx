@@ -30,7 +30,8 @@ class ListItem extends Component {
         });
             i = 0;
             Object.keys(this.state.data).forEach(key=>{
-                shuzu[i].title = key;shuzu[i].msg = this.state.data[key];
+                shuzu[i].title = key;shuzu[i].msg = this.state.data[key].split('$$$$$$')[0];
+                shuzu[i].date=this.state.data[key].split('$$$$$$')[1];
                 i++;
             });
             //console.log(this.state);
@@ -57,26 +58,21 @@ class ListItem extends Component {
     }
 
     render() {
-        {console.log(this.state.data)}
-        const getTime = ()=>{
-            const date = new Date();
-            return date.getFullYear()+'年'+(date.getMonth()+1)+'月'+date.getDate()+'日';
-        };
         const formitems = shuzu.map(keys =>{
             return (
                 <div>
-                <p>{keys.title}</p><br />
+                    <p>{keys.title}</p><p>{keys.date?keys.date:''}</p><br />
                 <ReactMarkdown source={keys.msg} />
                 <Divider />
                 </div>
             )
         });
-        return ( this.state.loading ? <Spin /> :
+        return ( this.state.loading ? <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}><Spin /></div> :
             <div style={{width:'80vw'}}>
                 <div style = {{marginTop:10}}>
                 <Button icon='left' style = {{marginLeft:'40px'}} onClick={this.handleClick}>Back</Button>
                 </div>
-                <div style = {{marginTop:5,marginLeft:20}}>
+                <div style = {{marginTop:10,marginLeft:30}}>
                     {formitems}
                 </div>
 

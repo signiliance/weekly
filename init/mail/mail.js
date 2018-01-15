@@ -6,16 +6,14 @@ const Mail  = module.exports = {};
 
 Mail.sendMail=(username,obj)=>{
 
-    let date = new Date();
-    let day=1;
-    if(date.getDay() <= 4){
-        day = 4 - date.getDay();
-    }else if(date.getDay()==5){
-        day = 6;
-    }else{
-        day = 5;
+    const date = new Date();
+    let hour=0;
+    if(date.getHours() <= 21){
+        hour = 21 - (date.getHours()+date.getMinutes()/60);
     }
+    console.log(hour);
     setTimeout(function(){
+
 
     let transporter = nodemailer.createTransport({
         host: 'smtp.qq.com',
@@ -28,11 +26,12 @@ Mail.sendMail=(username,obj)=>{
     });
     let mailOptions = {
         from: '847901578@qq.com', // sender address
-        to: '727247752@qq.com', // list of receivers
+        to: 'wurongliang@ofo.com', // list of receivers
         subject: 'weekly', // Subject line
-        text: obj, // plain text body
-        //html: '<b>{content}</b>' // html body
+        //text: obj, // plain text body
+        html: marked('#### '+obj.date)+marked(obj.content), // html body
     };
+    //console.log(marked(obj.content));
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             return console.log(error);
@@ -42,5 +41,5 @@ Mail.sendMail=(username,obj)=>{
         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
 
 
-})},day*24*60*60*1000)
+})},hour*60*60*1000)
 }

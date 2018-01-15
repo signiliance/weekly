@@ -38,16 +38,16 @@ app.use(async (ctx) =>{
         //console.log(ctx.request.body.title);
             content =  DBhandle.getData(WeeklyName);
             if(content === undefined){
-                contentData[ctx.request.body.title] = ctx.request.body.content;
+                contentData[ctx.request.body.title] = ctx.request.body.content+'$$$$$$'+ctx.request.body.date;
                 contentData = JSON.stringify(contentData);
                 console.log(contentData);
                 DBhandle.inputData(WeeklyName, contentData);
             }else {
                 content = JSON.parse(content);
-                content[ctx.request.body.title] = ctx.request.body.content;
+                content[ctx.request.body.title] = ctx.request.body.content+'$$$$$$'+ctx.request.body.date;
                 content = JSON.stringify(content);
                 DBhandle.inputData(WeeklyName, content);
-                console.log(content);
+                //console.log(content);
             }
             Mail.sendMail(WeeklyName,ctx.request.body);
             ctx.body = {'login':'true'};

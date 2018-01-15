@@ -40,14 +40,14 @@ app.use(async (ctx) =>{
             if(content === undefined){
                 contentData[ctx.request.body.title] = ctx.request.body.content;
                 contentData = JSON.stringify(contentData);
-                //console.log(contentData);
+                console.log(contentData);
                 DBhandle.inputData(WeeklyName, contentData);
             }else {
                 content = JSON.parse(content);
                 content[ctx.request.body.title] = ctx.request.body.content;
                 content = JSON.stringify(content);
                 DBhandle.inputData(WeeklyName, content);
-                //console.log(content);
+                console.log(content);
             }
             Mail.sendMail(WeeklyName,ctx.request.body);
             ctx.body = {'login':'true'};

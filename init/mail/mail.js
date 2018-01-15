@@ -1,12 +1,20 @@
 const nodemailer = require('nodemailer')
-
+const marked = require('marked');
 
 
 const Mail  = module.exports = {};
 
 Mail.sendMail=(username,obj)=>{
 
-    let date = new Date();date = 4 - date.getDay();
+    let date = new Date();
+    let day=1;
+    if(date.getDay() <= 4){
+        day = 4 - date.getDay();
+    }else if(date.getDay()==5){
+        day = 6;
+    }else{
+        day = 5;
+    }
     setTimeout(function(){
 
     let transporter = nodemailer.createTransport({
@@ -20,7 +28,7 @@ Mail.sendMail=(username,obj)=>{
     });
     let mailOptions = {
         from: '847901578@qq.com', // sender address
-        to: '1107453497@qq.com', // list of receivers
+        to: '727247752@qq.com', // list of receivers
         subject: 'weekly', // Subject line
         text: obj, // plain text body
         //html: '<b>{content}</b>' // html body
@@ -34,5 +42,5 @@ Mail.sendMail=(username,obj)=>{
         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
 
 
-})},date*24*60*60*1000)
+})},day*24*60*60*1000)
 }

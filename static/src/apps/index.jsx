@@ -14,9 +14,12 @@ class App extends React.Component {
 
     constructor(props){
         super(props);
+        const date = new Date();
+        const time = (date.getFullYear()+'年'+(date.getMonth()+1)+'月'+date.getDate()+'日').toString();
         this.state = {
             title:'',
-            content:''
+            content:'',
+            date:time,
         }
     }
 

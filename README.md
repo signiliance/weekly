@@ -7,7 +7,7 @@ cd static<br />
 npm i<br />
 npm run build<br />
 cd ../init/sql<br />
-redis-server<br />
+redis-server（需要装redis）<br />
 cd ../../<br />
 nodemon index.js<br />
 

@@ -6,15 +6,6 @@ const Mail  = module.exports = {};
 
 Mail.sendMail=(username,obj)=>{
 
-    const date = new Date();
-    let hour=0;
-    if(date.getHours() <= 21){
-        hour = 21 - (date.getHours()+date.getMinutes()/60);
-    }
-    console.log(hour);
-    setTimeout(function(){
-
-
     let transporter = nodemailer.createTransport({
         host: 'smtp.qq.com',
         port: 465,
@@ -41,5 +32,5 @@ Mail.sendMail=(username,obj)=>{
         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
 
 
-})},hour*60*60*1000)
-}
+})
+};

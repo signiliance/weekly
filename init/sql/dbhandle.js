@@ -8,14 +8,14 @@ const redis = new Redis({
 });
 
 let dataValue;
-let flag;
+//let flag;
 //redis.set('ofo','{}')
 /*redis.set('foo','bar');
 redis.get('foo',(err,res)=>{
     console.log(res);
 });
 
-const dbhand = (userName,title,content)=>{
+const dbhand = (userName,title,content)=>{kp[i
     redis.set(userName,title);
     redis.get(userName,(err,res)=>{
         console.log(res)
@@ -51,23 +51,54 @@ const DBhandle  = module.exports = {};
          })
      }
      fn(userName,content);
-    return flag;
 };
 
 
-DBhandle.getData = (userName)=>{
-    //redis.set('ofo','{}');
-    async function fn(){
-        await redis.get(userName).then((res)=>{
+DBhandle.getData1 = (userName)=>{
+    /*let myPromise =  new Promise(function (resolve,reject) {
+        redis.get(userName).then((res)=>{
             if(res) {
-                dataValue = res;
+                resolve(res);
+                //dataValue = res;
             }else{
-                flag = 0;
+                reject(err);
             }
+        },function (e) {
+            console.info(e);
         });
-    }
-    //console.log(fn());
-    fn();
-        return dataValue;
+
+    });
+    return myPromise;*/
+    //redis.set('ofo','{}');
+     async function fn(){
+         /*await redis.get(userName).then((res)=>{
+             if(res) {
+                 dataValue = res;
+             }else{
+                 flag = 0;
+             }
+         });*/
+         let a
+         let res = await redis.get(userName).then(function(r){
+             a = r
+             console.log('======',r)
+         })
+         console.log(a)
+     }
+     //console.log(fn());
+     fn();
+     return dataValue;
+
+};
+
+DBhandle.getData = async (userName)=>{
+   // let a
+    await redis.get(userName).then(function(res){
+        dataValue = res;
+        //console.log('======',r)
+    })
+    //console.log('===',a)
+    //console.log(dataValue);
+    return dataValue;
 
 };

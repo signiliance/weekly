@@ -6,7 +6,7 @@ import data from '../pages/list';
 import Fetch from '../services/FetchData';
 import ReactMarkdown from 'react-markdown';
 //import 'whatwg-fetch';
-let shuzu = [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}];let i = 0;
+let shuzu = [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}];let i = 0;
 //const comFetch = FetchData.comFetch;
 class ListItem extends Component {
 
@@ -22,7 +22,7 @@ class ListItem extends Component {
 
     componentWillMount(){
         Fetch.getListMsg((data)=>{
-            console.log(data);
+            //console.log(data);
             //console.log(typeof data);
             this.setState({
                 data:data,
@@ -41,21 +41,7 @@ class ListItem extends Component {
     handleClick=()=>{
         const path = '/admin';
         browserHistory.push(path);
-    }
-
-    handleCheck = (e) =>{
-        this.setState({
-            title:e.target.innerText,
-        });
-        this.state.data.filter((item)=>{
-            if(this.state.title == item.title){
-                return this.setState({
-                    msg:item.msg,
-                })
-            }
-        })
-        //console.log(this.state.msg)
-    }
+    };
 
     render() {
         const formitems = shuzu.map(keys =>{
@@ -67,7 +53,7 @@ class ListItem extends Component {
                 </div>
             )
         });
-        return ( this.state.loading ? <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}><Spin /></div> :
+        return ( this.state.loading ? <div style={{height:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}><Spin /></div> :
             <div style={{width:'80vw'}}>
                 <div style = {{marginTop:10}}>
                 <Button icon='left' style = {{marginLeft:'40px'}} onClick={this.handleClick}>Back</Button>

@@ -22,11 +22,16 @@ app.use(serve(__dirname+ "/static/build",{ extensions: ['html']}));
 app.use(async (ctx) =>{
 
     if(ctx.url === '/liste' && ctx.method === 'GET'){
-
-        ctx.body = DBhandle.getData(WeeklyName);
+       /*DBhandle.getData(WeeklyName).then((data)=>{
+           ctx.body=data;
+       }).catch((err)=>{console.log(err)});*/
+       async function fn() {
+           ctx.body = await DBhandle.getData(WeeklyName);
+       }
+       fn();
 
     }else if(ctx.url === '/login' && ctx.method === 'POST'){
-        console.log(ctx.request.body);
+        //console.log(ctx.request.body);
         let postData = ctx.request.body;
         if(postData.userName == 'ofo' && postData.password == '123'){
             WeeklyName = postData.userName;
@@ -44,10 +49,10 @@ app.use(async (ctx) =>{
                 DBhandle.inputData(WeeklyName, contentData);
             }else {
                 content = JSON.parse(content);
-                content[ctx.request.body.title] = ctx.request.body.content+'$$$$$$'+ctx.request.body.date;
+                content[ctx.request.body.title] = ctx.request.body.content + '$$$$$$' + ctx.request.body.date;
                 content = JSON.stringify(content);
                 DBhandle.inputData(WeeklyName, content);
-                //console.log(content);
+                console.log(content);
             }
             Mail.sendMail(WeeklyName,ctx.request.body);
             ctx.body = {'login':'true'};

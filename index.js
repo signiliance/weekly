@@ -25,10 +25,8 @@ app.use(async (ctx) =>{
        /*DBhandle.getData(WeeklyName).then((data)=>{
            ctx.body=data;
        }).catch((err)=>{console.log(err)});*/
-       async function fn() {
+
            ctx.body = await DBhandle.getData(WeeklyName);
-       }
-       fn();
 
     }else if(ctx.url === '/login' && ctx.method === 'POST'){
         //console.log(ctx.request.body);
@@ -54,7 +52,7 @@ app.use(async (ctx) =>{
                 DBhandle.inputData(WeeklyName, content);
                 console.log(content);
             }
-            Mail.sendMail(WeeklyName,ctx.request.body);
+            //Mail.sendMail(WeeklyName,ctx.request.body);
             ctx.body = {'login':'true'};
 
        /* DBhandle.inputData(WeeklyName, content);

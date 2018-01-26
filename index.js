@@ -39,7 +39,7 @@ app.use(async (ctx) =>{
         }
     }else if(ctx.url === '/write' && ctx.method === 'POST') {
         //console.log(ctx.request.body.title);
-            content =  DBhandle.getData(WeeklyName);
+            content = await DBhandle.getData(WeeklyName);
             if(content === undefined){
                 contentData[ctx.request.body.title] = ctx.request.body.content+'$$$$$$'+ctx.request.body.date;
                 contentData = JSON.stringify(contentData);

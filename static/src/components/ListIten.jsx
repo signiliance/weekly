@@ -6,7 +6,7 @@ import data from '../pages/list';
 import Fetch from '../services/FetchData';
 import ReactMarkdown from 'react-markdown';
 //import 'whatwg-fetch';
-let shuzu = [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}];let i = 0;
+let shuzu = data;let i = 0;
 //const comFetch = FetchData.comFetch;
 class ListItem extends Component {
 
@@ -20,7 +20,7 @@ class ListItem extends Component {
         }
     }
 
-    componentWillMount(){
+    componentDidMount(){
         Fetch.getListMsg((data)=>{
             //console.log(data);
             //console.log(typeof data);
@@ -34,6 +34,9 @@ class ListItem extends Component {
                 shuzu[i].date=this.state.data[key].split('$$$$$$')[1];
                 i++;
             });
+            this.setState({
+                msg:'222',
+            })
             //console.log(this.state);
         })
     }

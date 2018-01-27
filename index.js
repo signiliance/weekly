@@ -35,7 +35,7 @@ app.use(async (ctx) =>{
             WeeklyName = postData.userName;
             ctx.body = {login:'true'};
         }else{
-            ctx.body = '404'
+            ctx.body = '404' ;
         }
     }else if(ctx.url === '/write' && ctx.method === 'POST') {
         //console.log(ctx.request.body.title);
@@ -61,11 +61,11 @@ app.use(async (ctx) =>{
 
 });
 
-function fn2(){
-    content =  DBhandle.getData(WeeklyName);
-    content = JSON.parse(content);
-    //console.log(content);
-}
+// function fn2(){
+//     content =  DBhandle.getData(WeeklyName);
+//     content = JSON.parse(content);
+//     //console.log(content);
+// }
 //router.get('/',async ()=>{});
 
 

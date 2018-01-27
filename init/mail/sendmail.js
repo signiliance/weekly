@@ -14,7 +14,7 @@ const date = new Date();
         for (let key in data) {
             if (data[key].split('$$$$$$')[1] === day) {
                 let emailData = {};
-                emailData.content = data[key].split('$$$$$$')[0];
+                emailData.content = marked(data[key].split('$$$$$$')[0]);
                 emailData.date = data[key].split('$$$$$$')[1];
                 console.log(emailData);
                 Mail.sendMail('ofo', emailData);
